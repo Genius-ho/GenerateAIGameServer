@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  nestjs:
+    build: .
+    image: genaigameserver
+    ports:
+      - "3000:3000"
+      - "9229:9229" # Debugging port for VS Code
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URI=mongodb://mongodb:27017/genai
+      - REDIS_URI=redis://redis:6379 # 레디스 접속 주소 추가
+    command: nest start --debug 0.0.0.0:9229 # 개발용 실행 명령어 덮어쓰기
+    depends_on:
+      - mongodb
+      - redis # 서버가 켜지기 전에 레디스부터 켜도록 지시
+      
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata6:/data/db
+      
+  redis:
+    image: redis:7-alpine # 가볍고 빠른 알파인 버전의 레디스 엔진
+    ports:
+      - "6379:6379" # 레디스의 기본 출입문(6379번) 개방
+
+volumes:
+  dbdata6:

@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0", // 설정 파일의 버전입니다.
+  "configurations": [
+    
+     // 실행 버튼을 눌렀을 때 동작할 규칙들의 모음입니다.
+    {
+      "name": "Docker Node.js Launch", // VS Code 왼쪽 실행 탭의 드롭다운 메뉴에 표시될 이름입니다.
+      "type": "docker", // 도커(Docker) 환경에서 실행하겠다는 의미입니다.
+      "request": "launch", // 새로운 프로그램을 실행(launch)하라는 요청입니다.
+      "preLaunchTask": "docker-run: debug", // ★중요: 실행 직전에 'tasks.json'에 있는 "docker-run: debug" 작업을 먼저 수행하라는 지시입니다.
+      "platform": "node", // 구동할 플랫폼이 Node.js임을 컴퓨터에 알려줍니다.
+      "dockerServerReadyAction": { // 도커 서버가 켜졌는지 확인하는 방법입니다.
+        "pattern": "Application has started on port (\\d+)" // 터미널에 이 문장이 출력되면 서버가 완전히 켜졌다고 인식합니다.
+      }
+    }
+  ]
+}
