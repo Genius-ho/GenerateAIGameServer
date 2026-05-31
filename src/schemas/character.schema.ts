@@ -14,9 +14,9 @@ export class Character {
   @Prop({ default: 0 })
   race: number; // 0=자녀, 1=부모
 
-  @Prop({ default: 0 })
-  money: number; // 보유 금액 (원)
-
+  @Prop({ default: 50000 }) // 💡 기본 소지금 50,000원으로 변경
+  money: number;
+  
   @Prop({ default: 10 })
   hp: number; // 체력 (초기값 10)
 
